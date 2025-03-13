@@ -1,0 +1,18 @@
+const express = require("express")
+const app = express()
+const dotenv = require("dotenv")
+dotenv.config()
+const mongoose = require("mongoose")
+const cors = require("cors")
+const projectRouter = require("./routes/projects/projects.routes")
+const taskRouterAPI = require("./routes/tasks/tasks.routes")
+app.listen(process.env.PORT, () => {
+ console.log(`Server is running on port ${process.env.PORT}`)
+})
+mongoose.connect(process.env.DB_CONNECT).then(() => {console.log("Database connected successfully")}).catch(() => {
+ console.log("Failed to connect")
+})
+app.use(cors())
+app.use(express.json())
+app.use("/api", projectRouter)
+app.use("/api/v1", taskRouterAPI)
