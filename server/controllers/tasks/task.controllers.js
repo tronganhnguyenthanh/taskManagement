@@ -31,8 +31,18 @@ const updateTaskDescription = async (req, res) => {
     res.status(400).json({message:error.message})
   }
 }
+const deleteTaskDescriptionById = async (req, res) => {
+  try{
+    let _id = req.params.id
+    await tasksModel.findByIdAndDelete(_id)
+    res.status(200).json({message:"Task deletedsuccessfully"})
+  }catch(error){
+    res.status(400).json({message:error.message})
+  }
+}
 module.exports = {
  addNewTaskDescription,
  getAllTaskDescription,
- updateTaskDescription
+ updateTaskDescription,
+ deleteTaskDescriptionById
 }
