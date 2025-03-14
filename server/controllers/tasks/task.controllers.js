@@ -3,8 +3,8 @@ const addNewTaskDescription = async (req, res) => {
   try{
     const addNewTask = new tasksModel({
      taskDescription:req.body.taskDescription,
-     startDate:req.body.startDate,
-     endDate:req.body.endDate
+     startDate: new Date(req.body.startDate),
+     endDate: new Date(req.body.endDate)
     })
     await addNewTask.save()
     res.status(200).json({message:"Task description added successfully"})
